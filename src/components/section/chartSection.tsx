@@ -104,7 +104,7 @@ export const ChartSection: React.FC = () => {
                 <ProgressChart data={data} />
                 {
                     networkState === NetworkState.Loading &&
-                    <img src="/assets/img/loader.svg" className="chart-loading" alt="loading" />
+                    <img src="./assets/img/loader.svg" className="chart-loading" alt="loading" />
                 }
                 {
                     (data.length < 1 && networkState !== NetworkState.Loading) &&

@@ -30,7 +30,7 @@ export const ViewerApp: React.FC = () => {
               </ul> */}
             </div>
             <span className="image">
-              <BasicImage imageUrl="/assets/img/data.svg" alt="data" />
+              <BasicImage imageUrl="./assets/img/data.svg" alt="data" />
             </span>
           </div>
         </section>

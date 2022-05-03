@@ -6,8 +6,8 @@ export const Header: React.FC = () => {
         <header id="header" className="noselect alt">
             <span className="logo">
                 <div className="images">
-                    <img src="/assets/img/logoBg.png" className="logo-bg" alt="site logo" />
-                    <img src="/assets/img/logo.png" className="logo-fade" alt="site logo" />
+                    <img src="./assets/img/logoBg.png" className="logo-bg" alt="site logo" />
+                    <img src="./assets/img/logo.png" className="logo-fade" alt="site logo" />
                 </div>
             </span>
             <h1>Community Mission Viewer</h1>

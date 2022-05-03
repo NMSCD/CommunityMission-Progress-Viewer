@@ -10,8 +10,6 @@ interface IProps {
 }
 
 export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
-    console.log("renderingChart");
-
     const colours = [
         '00405c',
         '006588',

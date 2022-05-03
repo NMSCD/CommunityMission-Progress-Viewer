@@ -23,7 +23,10 @@ export const ChartSection: React.FC = () => {
 
         const service = new CommunityMissionService();
         const apiData = await service.getCommunityMissionTrackedProgress(startDateParam, endDateParam);
-        if (apiData.isSuccess == false) return;
+        if (apiData.isSuccess == false) {
+            setNetworkState(NetworkState.Failed);
+            return;
+        }
 
         setData(apiData.value);
         setNetworkState(NetworkState.Success);
@@ -107,7 +110,7 @@ export const ChartSection: React.FC = () => {
                     (data.length < 1 && networkState !== NetworkState.Loading) &&
                     <>
                         <br />
-                        <h2>No Data</h2>
+                        <h2 className="chart-loading">Failed to fetch data</h2>
                     </>
                 }
             </div>

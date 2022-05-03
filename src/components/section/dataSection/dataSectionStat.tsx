@@ -3,7 +3,7 @@ import { useOnScreen } from '../../core/onScreen';
 
 interface IProps {
     style: string;
-    imgUrl?: string;
+    iconClass: string;
     value: number;
     displayValue?: string;
     displayValueFunc?: (val: number) => string;
@@ -45,8 +45,8 @@ export const DataSectionStat: React.FC<IProps> = (props: IProps) => {
         valueToDisplay = props.displayValueFunc(value);
     }
     return (
-        <li ref={ref} className={props.style}>
-            <span className="icon solid fa-code-branch"></span>
+        <li ref={ref} className={props.style + ' section-stat'}>
+            <span className={props.iconClass}></span>
             <strong>{valueToDisplay}</strong>{props.description}
         </li>
     );

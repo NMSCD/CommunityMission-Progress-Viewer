@@ -11,8 +11,10 @@ export const Header: React.FC = () => {
                 </div>
             </span>
             <h1>Community Mission Viewer</h1>
-            <p>Just another free <a href={Site.nms.home}>NMS</a> tool, <br />
-                built by <a href={Site.assistantNMS.website}>Assistant for No Man's Sky</a>.</p>
+            <p>
+                Another free <a href={Site.nms.home}>NMS tool</a>, <br />
+                built by <a href={Site.assistantNMS.website}>Assistant for No Man's Sky</a>.
+            </p>
         </header>
     );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BasicImage } from './components/core/image';
 import { ChartSection } from './components/section/chartSection';
 import { DataSection } from './components/section/dataSection';
 import { Header } from './components/common/header';
@@ -7,8 +8,6 @@ import { Footer } from './components/common/footer';
 
 import './sass/main.scss';
 import './sass/custom.scss';
-import { Cyberpunk2350TwitterLink } from './components/core/link';
-import { BasicImage } from './components/core/image';
 
 export const ViewerApp: React.FC = () => {
   return (

@@ -21,6 +21,7 @@ export const ChartSection: React.FC = () => {
         ];
         if (errors.length > 0) return;
 
+        setNetworkState(NetworkState.Loading);
         const service = new CommunityMissionService();
         const apiData = await service.getCommunityMissionTrackedProgress(startDateParam, endDateParam);
         if (apiData.isSuccess == false) {
@@ -33,7 +34,6 @@ export const ChartSection: React.FC = () => {
     }
 
     useEffect(() => {
-        setNetworkState(NetworkState.Loading);
         getTrackedData(startDate, endDate);
     }, [startDate, endDate]);
 

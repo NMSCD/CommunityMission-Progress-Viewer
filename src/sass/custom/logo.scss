@@ -1,0 +1,26 @@
+.logo-fade {
+    animation-name: logo-fade-anim;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.logo-bg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes logo-fade-anim {
+    0% {
+        opacity: 0.89;
+    }
+
+    50% {
+        opacity: 0.59;
+    }
+
+    100% {
+        opacity: 0.89;
+    }
+}

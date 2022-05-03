@@ -1,0 +1,20 @@
+.progress-timeline {
+    .recharts-cartesian-axis {
+        transform: translateY(-30px);
+        &:first-of-type {
+            display: none;
+        }
+    }
+}
+
+.chart-section {
+    position: relative;
+    min-height: 500px;
+
+    .chart-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

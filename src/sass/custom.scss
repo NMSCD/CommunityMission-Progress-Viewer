@@ -1,0 +1,66 @@
+@import "custom/date.scss";
+@import "custom/chart.scss";
+@import "custom/logo.scss";
+
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: max(100vh, 100%);
+}
+
+.hidden {
+    display: none;
+}
+
+.max-width-75 {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.mt1 {
+    margin-top: 1em;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #c0c0c0;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: #7d76e3;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #b4ad60;
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+}

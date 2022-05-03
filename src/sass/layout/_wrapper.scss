@@ -1,0 +1,17 @@
+
+
+/* Wrapper */
+
+	#wrapper {
+		width: _size(inner);
+		max-width: calc(100% - 4em);
+		margin: 0 auto;
+
+		@include breakpoint('<=xsmall') {
+			max-width: calc(100% - 2em);
+		}
+
+		@include breakpoint('<=xxsmall') {
+			max-width: 100%;
+		}
+	}

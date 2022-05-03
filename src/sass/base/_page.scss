@@ -33,7 +33,7 @@ html {
 
 body {
     background-color: _palette(bg);
-    @include vendor('background-image', ('url("./assets/img/overlay.png")',
+    @include vendor('background-image', ('url("./img/overlay.png")',
             'linear-gradient(45deg, #{_palette(bg1)} 15%, #{_palette(bg2) 85%})',
         ));
 

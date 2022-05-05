@@ -1,5 +1,6 @@
 import React from 'react';
 import { Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, ComposedChart, Area, Bar } from 'recharts';
+import { progressChartColours } from '../../constants/chartColours';
 
 import { CommunityMissionTrackedViewModel } from '../../constants/generated/Model/communityMissionTrackedViewModel';
 import { formatDate } from '../../helper/dateHelper';
@@ -10,15 +11,6 @@ interface IProps {
 }
 
 export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
-    const colours = [
-        '00405c',
-        '006588',
-        '008da3',
-        '00b5a6',
-        '00db91',
-        '0dff64',
-    ];
-
     const groups = (props.data ?? []).reduce((groups: any, item) => ({
         ...groups,
         [item.hourSinceEpochInterval]: [...(groups[item.hourSinceEpochInterval] || []), item]
@@ -110,7 +102,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                 />
                 {
                     dataSetsToMap.map((dataSetToMap, idx) => {
-                        const chartColour = '#' + colours[idx % colours.length];
+                        const chartColour = '#' + progressChartColours[idx % progressChartColours.length];
                         return (
                             <Area
                                 key={dataSetToMap.key}

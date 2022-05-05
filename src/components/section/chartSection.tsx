@@ -104,13 +104,15 @@ export const ChartSection: React.FC = () => {
                 <ProgressChart data={data} />
                 {
                     networkState === NetworkState.Loading &&
-                    <img src="./assets/img/loader.svg" className="chart-loading" alt="loading" />
+                    <div className="chart-loading">
+                        <img src="./assets/img/loader.svg" alt="loading" />
+                    </div>
                 }
                 {
                     (data.length < 1 && networkState !== NetworkState.Loading) &&
                     <>
                         <br />
-                        <h2 className="chart-loading">Failed to fetch data</h2>
+                        <h2 className="chart-loading-text">Failed to fetch data</h2>
                     </>
                 }
             </div>

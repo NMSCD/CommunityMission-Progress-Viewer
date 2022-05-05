@@ -1,6 +1,7 @@
 import React from 'react';
 import { Site } from '../../constants/site';
 import { AssistantNmsWebLink, BasicLink, Cyberpunk2350TwitterLink, NmscdWebLink } from '../core/link';
+import packageJson from '../../../package.json';
 
 export const Footer: React.FC = () => {
     return (
@@ -25,7 +26,7 @@ export const Footer: React.FC = () => {
                     <dd>Ideas man &amp; Keeper of obscure knowledge</dd>
                 </dl>
             </section>
-            <p className="copyright">© NMSCD. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+            <p className="copyright">© NMSCD. | {packageJson.version} | Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
         </footer>
     );
 }

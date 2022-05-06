@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, ComposedChart, Area, Bar, BarChart } from 'recharts';
-import { progressChartColours } from '../../../constants/chartColours';
+import { XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, Bar, BarChart, Cell } from 'recharts';
+import { accent2, accent4, progressChartColours, weekDayColours } from '../../../constants/chartColours';
 import { CommunityMissionPercentagePerDay } from '../../../constants/generated/Model/communityMissionPercentagePerDayViewModel';
 
-import { CommunityMissionTrackedViewModel } from '../../../constants/generated/Model/communityMissionTrackedViewModel';
 import { NetworkState } from '../../../contracts/enum/NetworkState';
 import { formatDate } from '../../../helper/dateHelper';
 import { CommunityMissionService } from '../../../services/api/communityMissionService';
@@ -58,6 +57,7 @@ export const PercentageChart: React.FC<IProps> = React.memo((props: IProps) => {
                     const firstItem: CommunityMissionPercentagePerDay = groupsData[0];
                     const itemDate = new Date(firstItem.daySinceEpochInterval * 86400000);
                     (firstItem as any).spaces = 0;
+                    (firstItem as any).dayOfTheWeekIndex = itemDate.getDay();
                     (firstItem as any).dateRecordedHour = formatDate(itemDate, 'YYYY/MM/DD');
                     timeSeriesList.push(firstItem);
                 } else {
@@ -84,6 +84,25 @@ export const PercentageChart: React.FC<IProps> = React.memo((props: IProps) => {
         }
     }
 
+    const renderLegend = (_: any) => {
+        return (
+            <ul>
+                <li className="recharts-legend-item legend-item-0" style={{ display: 'inline-block', marginRight: '10px' }}>
+                    <svg className="recharts-surface" width="14" height="24" viewBox="0 0 32 32" version="1.1" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '4px' }}>
+                        <path stroke="none" fill={accent4} d="M0,4h32v24h-32z" className="recharts-legend-icon"></path></svg>
+                    <span className="recharts-legend-item-text"
+                        style={{ color: 'rgb(0, 64, 92)' }}>Weekday</span>
+                </li>
+                <li className="recharts-legend-item legend-item-0" style={{ display: 'inline-block', marginRight: '10px' }}>
+                    <svg className="recharts-surface" width="14" height="24" viewBox="0 0 32 32" version="1.1" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '4px' }}>
+                        <path stroke="none" fill={accent2} d="M0,4h32v24h-32z" className="recharts-legend-icon"></path></svg>
+                    <span className="recharts-legend-item-text"
+                        style={{ color: 'rgb(0, 64, 92)' }}>Weekend</span>
+                </li>
+            </ul>
+        );
+    }
+
     return (
         <>
             {
@@ -96,7 +115,7 @@ export const PercentageChart: React.FC<IProps> = React.memo((props: IProps) => {
                     >
                         <XAxis xAxisId="0" dataKey="dateRecordedHour" />
                         <YAxis />
-                        <Legend />
+                        <Legend content={renderLegend} />
                         <Tooltip />
                         <Bar
                             type="monotone"
@@ -104,7 +123,11 @@ export const PercentageChart: React.FC<IProps> = React.memo((props: IProps) => {
                             name="Percentage change"
                             unit=" %"
                             fill={progressChartColours[0]}
-                        />
+                        >
+                            {sortedData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={weekDayColours[index % weekDayColours.length]} />
+                            ))}
+                        </Bar>
                     </BarChart>
                 </ResponsiveContainer>
             }

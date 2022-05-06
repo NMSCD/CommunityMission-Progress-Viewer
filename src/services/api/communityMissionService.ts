@@ -2,6 +2,7 @@ import { ResultWithValue } from '../../contracts/results/ResultWithValue';
 import { BaseApiService } from '../BaseApiService';
 import { CommunityMissionViewModel } from '../../constants/generated/Model/communityMissionViewModel';
 import { CommunityMissionTrackedViewModel } from '../../constants/generated/Model/communityMissionTrackedViewModel';
+import { CommunityMissionPercentagePerDay } from '../../constants/generated/Model/communityMissionPercentagePerDayViewModel';
 
 export class CommunityMissionService extends BaseApiService {
 
@@ -10,7 +11,12 @@ export class CommunityMissionService extends BaseApiService {
     }
 
     async getCommunityMissionTrackedProgress(startDate: string, endDate: string): Promise<ResultWithValue<Array<CommunityMissionTrackedViewModel>>> {
-        const url = `CommunityMissionProgress/${startDate}/${endDate}`;
+        const url = `CommunityMissionProgress/progress/${startDate}/${endDate}`;
         return this.get<Array<CommunityMissionTrackedViewModel>>(url);
+    }
+
+    async getPercentageChangePerDay(startDate: string, endDate: string): Promise<ResultWithValue<Array<CommunityMissionPercentagePerDay>>> {
+        const url = `CommunityMissionProgress/percentChange/${startDate}/${endDate}`;
+        return this.get<Array<CommunityMissionPercentagePerDay>>(url);
     }
 }

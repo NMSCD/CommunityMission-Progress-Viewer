@@ -1,9 +1,9 @@
-export const accent1 = '00405c';
-export const accent2 = '006588';
-export const accent3 = '008da3';
-export const accent4 = '00b5a6';
-export const accent5 = '00db91';
-export const accent6 = '0dff64';
+export const accent1 = '#00405c';
+export const accent2 = '#006588';
+export const accent3 = '#008da3';
+export const accent4 = '#00b5a6';
+export const accent5 = '#00db91';
+export const accent6 = '#0dff64';
 
 export const progressChartColours = [
     accent1,

@@ -1,41 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormControl, FormLabel, FormErrorMessage, Input, Flex, Box } from '@chakra-ui/react'
+import { Select } from '@chakra-ui/react'
 
-import { CommunityMissionTrackedViewModel } from '../../constants/generated/Model/communityMissionTrackedViewModel';
 import { addDays, dateIsBefore, formatDate } from '../../helper/dateHelper';
-import { CommunityMissionService } from '../../services/api/communityMissionService';
-import { ProgressChart } from '../chart/progressChart';
-import { NetworkState } from '../../contracts/enum/NetworkState';
+import { ProgressChart } from '../chart/progress/progressChart';
+import { PercentageChart } from '../chart/percentageChange/percentageChart';
 
 export const ChartSection: React.FC = () => {
-    const [networkState, setNetworkState] = useState<NetworkState>(NetworkState.Loading);
-    const [data, setData] = useState<Array<CommunityMissionTrackedViewModel>>([]);
     const [startDate, setStartDate] = useState<string>(formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
     const [endDate, setEndDate] = useState<string>(formatDate(new Date(), 'YYYY-MM-DD'));
-
-    const getTrackedData = async (startDateParam: string, endDateParam: string) => {
-        const errors = [
-            ...getCommonDateErrors(startDateParam),
-            ...getStartDateErrors(startDateParam, endDateParam),
-            ...getCommonDateErrors(endDateParam)
-        ];
-        if (errors.length > 0) return;
-
-        setNetworkState(NetworkState.Loading);
-        const service = new CommunityMissionService();
-        const apiData = await service.getCommunityMissionTrackedProgress(startDateParam, endDateParam);
-        if (apiData.isSuccess == false) {
-            setNetworkState(NetworkState.Failed);
-            return;
-        }
-
-        setData(apiData.value);
-        setNetworkState(NetworkState.Success);
-    }
-
-    useEffect(() => {
-        getTrackedData(startDate, endDate);
-    }, [startDate, endDate]);
+    const [chartSelected, setChartSelected] = useState<string>('0');
 
     const getCommonDateErrors = (dateParam: string): Array<string> => {
         const errors: Array<string> = [];
@@ -73,9 +47,49 @@ export const ChartSection: React.FC = () => {
         ))
     }</>);
 
+    const renderChart = (chartSelectedIndex: string) => {
+        switch (chartSelectedIndex) {
+            case '0':
+                return (
+                    <ProgressChart
+                        startDate={startDate.toString()}
+                        endDate={endDate.toString()}
+                        hasErrors={[
+                            ...startDateErrors,
+                            ...endDateErrors
+                        ].length > 0}
+                    />
+                );
+            case '1':
+                return (
+                    <PercentageChart
+                        startDate={startDate.toString()}
+                        endDate={endDate.toString()}
+                        hasErrors={[
+                            ...startDateErrors,
+                            ...endDateErrors
+                        ].length > 0}
+                    />
+                );
+        }
+        return (<span>Something went wrong</span>)
+    }
+
     return (
-        <section id="chart" className="main special">
+        <section id="chart" className="main special" style={{ paddingTop: '3em' }}>
             <div className="content noselect">
+                <Flex>
+                    <FormControl flex="1">
+                        <FormLabel htmlFor='chartSelector'>Chart Type</FormLabel>
+                        <select id='chartSelector' className="mb2" onChange={(e: any) => setChartSelected(e.target.value)}>
+                            <option value="0">Progress per hour</option>
+                            <option value="1">Percentage change per day</option>
+                        </select>
+                    </FormControl>
+                    <Box w="25px"></Box>
+                    <FormControl flex="1">
+                    </FormControl>
+                </Flex>
                 <Flex>
                     <FormControl flex="1" isInvalid={startDateErrors.length > 0}>
                         <FormLabel htmlFor='startDate'>Start Date</FormLabel>
@@ -101,20 +115,7 @@ export const ChartSection: React.FC = () => {
                 </Flex>
             </div>
             <div className="content chart-section noselect" style={{ marginTop: '2em' }}>
-                <ProgressChart data={data} />
-                {
-                    networkState === NetworkState.Loading &&
-                    <div className="chart-loading">
-                        <img src="./assets/img/loader.svg" alt="loading" />
-                    </div>
-                }
-                {
-                    (data.length < 1 && networkState !== NetworkState.Loading) &&
-                    <>
-                        <br />
-                        <h2 className="chart-loading-text">Failed to fetch data</h2>
-                    </>
-                }
+                {renderChart(chartSelected)}
             </div>
         </section>
     );

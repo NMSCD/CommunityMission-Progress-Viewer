@@ -4,7 +4,9 @@ import { anyObject } from '../helper/typescriptHacks';
 
 
 export class BaseApiService {
-  private _baseUrl: String = window.config?.apiUrl ?? 'https://api.nmsassistant.com';
+  private _baseUrl: String = window.config?.apiUrl ??
+    // 'https://api.nmsassistant.com';
+    'http://localhost:55555';
   constructor(newBaseUrl?: String) {
     if (newBaseUrl != null) this._baseUrl = newBaseUrl;
   }

@@ -35,7 +35,7 @@ export const DataSection: React.FC = () => {
     let missionTierDisplay = '? / ??';
     if (networkState == NetworkState.Loading) missionTierDisplay = '...';
     if (networkState == NetworkState.Success) missionTierDisplay = `${data.currentTier} / ${data.totalTiers}`;
-    const missionPercentDisplay = data?.percentage ?? 0;
+    const missionPercentDisplay = data.percentage ?? 0;
 
     return (
         <section id="data-source" className="main special">
@@ -75,8 +75,7 @@ export const DataSection: React.FC = () => {
                     iconClass="icon-database"
                     description="Current Mission progress"
                     value={missionPercentDisplay}
-                    displayValueFunc={(val) => val.toString() + ' %'}
-                    animate={false}
+                    displayValue={`${missionPercentDisplay.toString()} %`}
                 />
             </ul>
             <p className="content">The <AssistantNmsWebLink /> apps have a service that runs 24/7 and requests the status from the <GalacticAtlasWebLink />. This data is then stored both a database and within a Redis cache. This data is served to anyone who requests it from the <AssistantNmsApiLink />. This means that a request for the Community Mission progress through the <AssistantNmsApiLink /> never makes a request to HelloGames servers as the data is already sitting in the database or Redis cache. If the <AssistantNmsApiLink /> is being attacked through a DDOS attack, HelloGames will not be affected. We would never want to put strain on the HelloGames servers🔥</p>

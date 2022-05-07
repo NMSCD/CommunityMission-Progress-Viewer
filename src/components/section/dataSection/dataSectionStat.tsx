@@ -45,7 +45,7 @@ export const DataSectionStat: React.FC<IProps> = (props: IProps) => {
         valueToDisplay = props.displayValueFunc(value);
     }
     return (
-        <li ref={ref} className={props.style + ' section-stat'}>
+        <li ref={ref} className={props.style + ' section-stat'} data-value={props.value}>
             <span className={props.iconClass}></span>
             <strong>{valueToDisplay}</strong>{props.description}
         </li>

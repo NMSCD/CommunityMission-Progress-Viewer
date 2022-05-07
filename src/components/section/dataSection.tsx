@@ -35,6 +35,7 @@ export const DataSection: React.FC = () => {
     let missionTierDisplay = '? / ??';
     if (networkState == NetworkState.Loading) missionTierDisplay = '...';
     if (networkState == NetworkState.Success) missionTierDisplay = `${data.currentTier} / ${data.totalTiers}`;
+    let missionPercentDisplay = data?.percentage ?? 0;
 
     return (
         <section id="data-source" className="main special">
@@ -70,10 +71,11 @@ export const DataSection: React.FC = () => {
                     animate={false}
                 />
                 <DataSectionStat
+                    key={missionPercentDisplay}
                     style="style5"
                     iconClass="icon-database"
                     description="Current Mission progress"
-                    value={data?.percentage ?? 0}
+                    value={missionPercentDisplay}
                     displayValueFunc={(val) => val.toString() + ' %'}
                 />
             </ul>

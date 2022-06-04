@@ -2,7 +2,7 @@
   "name": "nms-community-mission-viewer",
   "private": true,
   "homepage": "https://nmscd.github.io/communitymission-progress-viewer",
-  "version": "0.6.7",
+  "version": "0.7.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,14 +11,12 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.8.8",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
     "axios": "^0.27.2",
     "dayjs": "^1.11.1",
     "framer-motion": "^6.3.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-toastify": "^9.0.3",
     "recharts": "^2.1.9"
   },
   "devDependencies": {

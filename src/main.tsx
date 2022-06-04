@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ViewerApp } from './viewerApp';
 
 declare global {
-  interface Window { config: any }
+  interface Window { config: any, skrollr: any }
 }
 
 const container = document.getElementById('nms-community-mission-viewer') as HTMLElement;

@@ -1,0 +1,27 @@
+.flex {
+    display: flex;
+}
+
+.form-control {
+    flex: 1;
+
+    label {
+        display: block;
+        text-align: start;
+
+        &.center {
+            text-align: center;
+        }
+    }
+
+    .share-btn {
+        min-width: unset;
+        font-size: 1em;
+
+        img {
+            display: block;
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+}

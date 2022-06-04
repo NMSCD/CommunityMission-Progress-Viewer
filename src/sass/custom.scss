@@ -1,6 +1,9 @@
+@import "custom/form.scss";
 @import "custom/date.scss";
 @import "custom/chart.scss";
 @import "custom/logo.scss";
+@import "custom/toast.scss";
+@import "custom/parallax.scss";
 
 html,
 body {
@@ -8,7 +11,7 @@ body {
 }
 
 body {
-    height: max(100vh, 100%);
+    height: max(100vh, 100%) !important;
 }
 
 .hidden {
@@ -23,6 +26,7 @@ body {
 .mt1 {
     margin-top: 1em;
 }
+
 .mb2 {
     margin-bottom: 2em;
 }
@@ -56,14 +60,12 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
     background-color: #b4ad60;
-    background-image: -webkit-linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.2) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0.2) 75%,
-        transparent 75%,
-        transparent
-    );
+    background-image: -webkit-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.2) 75%,
+            transparent 75%,
+            transparent);
 }

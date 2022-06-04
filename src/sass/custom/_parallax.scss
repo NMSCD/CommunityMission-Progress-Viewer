@@ -1,0 +1,11 @@
+[class^="parallax-"],
+[class*=" parallax-"] {
+    z-index: 1000;
+}
+
+.parallax-qs-merchant {
+    position: fixed;
+    bottom: 0px;
+    left: -300px;
+    height: 300px;
+}

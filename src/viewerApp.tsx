@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { BasicImage } from './components/core/image';
 import { ChartSection } from './components/section/chartSection';
 import { DataSection } from './components/section/dataSection';
 import { Header } from './components/common/header';
 import { Navbar } from './components/common/navbar';
 import { Footer } from './components/common/footer';
+import { TimeLoopParallax } from './components/common/parallax';
 
 import './sass/main.scss';
 import './sass/custom.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ViewerApp: React.FC = () => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.skrollr.init();
+    }, 500);
+  }, [])
+
   return (
     <div id="wrapper">
       <Header />
@@ -41,6 +51,20 @@ export const ViewerApp: React.FC = () => {
       </div>
 
       <Footer />
+
+      <TimeLoopParallax />
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

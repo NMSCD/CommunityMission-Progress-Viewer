@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
-import { FormControl, FormLabel, FormErrorMessage, Input, Flex, Box } from '@chakra-ui/react'
-import { Select } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react';
 
 import { addDays, dateIsBefore, formatDate } from '../../helper/dateHelper';
 import { ProgressChart } from '../chart/progress/progressChart';
 import { PercentageChart } from '../chart/percentageChange/percentageChart';
+import { BasicImage } from '../core/image';
+import { infoToast } from '../../helper/toastHelper';
 
 export const ChartSection: React.FC = () => {
-    const [startDate, setStartDate] = useState<string>(formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
-    const [endDate, setEndDate] = useState<string>(formatDate(new Date(), 'YYYY-MM-DD'));
-    const [chartSelected, setChartSelected] = useState<string>('0');
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const type = urlParams.get('type');
+    const start = urlParams.get('start');
+    const end = urlParams.get('end');
+
+    const [startDate, setStartDate] = useState<string>(start ?? formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
+    const [endDate, setEndDate] = useState<string>(end ?? formatDate(new Date(), 'YYYY-MM-DD'));
+    const [chartSelected, setChartSelected] = useState<string>(type ?? '0');
+
+    useEffect(() => {
+        const paramString = getUrlParamString();
+        window.history.pushState({}, 'title', paramString);
+    }, [
+        startDate,
+        endDate,
+        chartSelected,
+    ]);
 
     const getCommonDateErrors = (dateParam: string): Array<string> => {
         const errors: Array<string> = [];
@@ -39,11 +55,30 @@ export const ChartSection: React.FC = () => {
     const startDateErrors = getStartDateErrors(startDate, endDate);
     const endDateErrors = getEndDateErrors(startDate, endDate);
 
+    const getUrlParamString = () => {
+        const params = [
+            { name: 'type', value: chartSelected },
+            { name: 'start', value: startDate.toString() },
+            { name: 'end', value: endDate.toString() },
+        ];
+        const paramString = '?' + params.map(p => p.name + '=' + p.value).join('&');
+        return paramString;
+    }
+
+    const copySelectedOptions = () => {
+        const baseUrl = 'https://nmscd.github.io/CommunityMission-Progress-Viewer/';
+        const paramString = getUrlParamString();
+        const fullLink = baseUrl + paramString;
+        navigator?.clipboard?.writeText?.(fullLink)?.then?.(() => {
+            infoToast('Copied url');
+        });
+    }
+
     const renderErrors = (errorMsgs: Array<string>) => (<>{
         errorMsgs.map(errorMsg => (
-            <FormErrorMessage key={errorMsg}>
+            <div key={errorMsg}>
                 {errorMsg}
-            </FormErrorMessage>
+            </div>
         ))
     }</>);
 
@@ -78,43 +113,49 @@ export const ChartSection: React.FC = () => {
     return (
         <section id="chart" className="main special" style={{ paddingTop: '3em' }}>
             <div className="content noselect">
-                <Flex>
-                    <FormControl flex="1">
-                        <FormLabel htmlFor='chartSelector'>Chart Type</FormLabel>
-                        <select id='chartSelector' className="mb2" onChange={(e: any) => setChartSelected(e.target.value)}>
+                <div className="flex">
+                    <div className="form-control">
+                        <label htmlFor="chartSelector">Chart Type</label>
+                        <select id="chartSelector" className="mb2"
+                            value={chartSelected}
+                            onChange={(e: any) => setChartSelected(e.target.value)}>
                             <option value="0">Progress per hour</option>
                             <option value="1">Percentage change per day</option>
                         </select>
-                    </FormControl>
-                    <Box w="25px"></Box>
-                    <FormControl flex="1">
-                    </FormControl>
-                </Flex>
-                <Flex>
-                    <FormControl flex="1" isInvalid={startDateErrors.length > 0}>
-                        <FormLabel htmlFor='startDate'>Start Date</FormLabel>
-                        <Input
-                            id='startDate'
-                            type='date'
+                    </div>
+                    <div style={{ width: '25px' }}></div>
+                    <div className="form-control">
+                        <label className="center">Share currently selected options</label>
+                        <button className="share-btn" onClick={copySelectedOptions}>
+                            <BasicImage imageUrl="./assets/img/share.svg" alt="share" />
+                        </button>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="form-control">
+                        <label htmlFor="startDate">Start Date</label>
+                        <input
+                            id="startDate"
+                            type="date"
                             value={startDate.toString()}
                             onChange={(e: any) => setStartDate(e.target.value)}
                         />
                         {renderErrors(startDateErrors)}
-                    </FormControl>
-                    <Box w="25px"></Box>
-                    <FormControl flex="1" isInvalid={endDateErrors.length > 0}>
-                        <FormLabel htmlFor='endDate'>End Date</FormLabel>
-                        <Input
-                            id='endDate'
-                            type='date'
+                    </div>
+                    <div style={{ width: '25px' }}></div>
+                    <div className="form-control">
+                        <label htmlFor="endDate">End Date</label>
+                        <input
+                            id="endDate"
+                            type="date"
                             value={endDate.toString()}
                             onChange={(e: any) => setEndDate(e.target.value)}
                         />
                         {renderErrors(endDateErrors)}
-                    </FormControl>
-                </Flex>
+                    </div>
+                </div>
             </div>
-            <div className="content chart-section noselect" style={{ marginTop: '2em' }}>
+            <div className="content chart-section noselect">
                 {renderChart(chartSelected)}
             </div>
         </section>

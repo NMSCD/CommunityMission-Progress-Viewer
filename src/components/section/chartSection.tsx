@@ -135,7 +135,7 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
                     </div>
                     <div style={{ width: '25px' }}></div>
                     <div className="form-control">
-                        <label className="center">Share currently selected options</label>
+                        <label className="center">Options</label>
                         <span className="tool" data-tip="Reset all the options to default values">
                             <button className="share-btn" onClick={resetOptions}>
                                 <BasicImage imageUrl="./assets/img/reset.svg" alt="reset" />

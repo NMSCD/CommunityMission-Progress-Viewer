@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-export const formatDate = (date: Date, format: string = 'YYYY/MM/DD'): string => {
+export const formatDate = (date: Date | string, format: string = 'YYYY/MM/DD'): string => {
     try {
         return dayjs(date).format(format);
     }

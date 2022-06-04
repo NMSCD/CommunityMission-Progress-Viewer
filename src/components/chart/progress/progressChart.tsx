@@ -16,6 +16,7 @@ interface IProps {
 
 export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
     const [networkState, setNetworkState] = useState<NetworkState>(NetworkState.Loading);
+    const [missionAndTier, setMissionAndTier] = useState<string>();
     const [data, setData] = useState<Array<CommunityMissionTrackedViewModel>>([]);
 
     useEffect(() => {
@@ -23,10 +24,10 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
         getTrackedData(props.startDate, props.endDate);
     }, [props.startDate, props.endDate]);
 
-    const getTrackedData = async (startDateParam: string, endDateParam: string) => {
+    const getTrackedData = async (startDateParam: string, endDateParam: string, missionIdParam?: number, missionTierParam?: number) => {
         setNetworkState(NetworkState.Loading);
         const service = new CommunityMissionService();
-        const apiData = await service.getCommunityMissionTrackedProgress(startDateParam, endDateParam);
+        const apiData = await service.getCommunityMissionTrackedProgress(startDateParam, endDateParam, missionIdParam, missionTierParam);
         if (apiData.isSuccess == false) {
             setNetworkState(NetworkState.Failed);
             return;
@@ -56,9 +57,10 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                     if (groupsData.length < 1) continue;
 
                     const firstItem: CommunityMissionTrackedViewModel = groupsData[0];
+
                     (firstItem as any).spaces = 0;
-                    (firstItem as any).dateRecordedHour = formatDate(firstItem.dateRecorded, 'MM/DD');
-                    (firstItem as any).dateRecordedFriendly = formatDate(firstItem.dateRecorded, 'MM/DD HH:00');
+                    (firstItem as any).dateRecordedHour = formatDate(firstItem.dateRecorded.toLocaleString(), 'MM/DD');
+                    (firstItem as any).dateRecordedFriendly = formatDate(firstItem.dateRecorded.toLocaleString(), 'MM/DD HH:00');
                     timeSeriesList.push(firstItem);
                 } else {
                     timeSeriesList.push({
@@ -82,13 +84,14 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
 
     const handleData = (sortedData: Array<CommunityMissionTrackedViewModel>, dataSetsToMap: Array<any>): Array<CommunityMissionTrackedViewModel> => {
         try {
-
             const dataWithMultiplDataSetMappings: Array<CommunityMissionTrackedViewModel> = [];
             for (let sortedDataItemIndex = 0; sortedDataItemIndex < sortedData.length; sortedDataItemIndex++) {
                 const filteredDataItem = sortedData[sortedDataItemIndex];
                 const newObj: any = { ...filteredDataItem };
                 for (const dataSetToMap of dataSetsToMap) {
                     const keys = dataSetToMap.key.split(':');
+                    if (missionAndTier != null && dataSetToMap.key != missionAndTier) continue;
+
                     if (filteredDataItem.missionId.toString() != keys[0] || filteredDataItem.tier.toString() != keys[1]) {
                         // newObj[dataSetToMap.key] = 0;
                     }
@@ -106,6 +109,29 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
             return [];
         }
 
+    }
+
+    const onAreaChartClicked = (localMissionAndTier: string | undefined) => (chartObj: any) => {
+        if (localMissionAndTier != null) {
+            setMissionAndTier(undefined);
+            return;
+        }
+
+        let selectedData;
+        for (const activePay of chartObj.activePayload) {
+            if (activePay.value != null && activePay.value > 0) {
+                selectedData = activePay.payload;
+                break;
+            }
+        }
+        if (selectedData == null) return;
+
+        const missionId = selectedData?.missionId;
+        if (missionId == null) return;
+        const missionTier = selectedData?.tier;
+        if (missionTier == null) return;
+
+        setMissionAndTier(`${missionId}:${missionTier}`);
     }
 
     let hasError: boolean = false;
@@ -144,6 +170,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                         width={800}
                         height={600}
                         data={dataWithMultiplDataSetMappings}
+                        onClick={onAreaChartClicked(missionAndTier)}
                     >
                         <XAxis xAxisId="0" dataKey="dateRecordedHour" />
                         <XAxis xAxisId="1" dataKey="dateRecordedHour" allowDuplicatedCategory={false} />

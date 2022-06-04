@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { BasicImage } from './components/core/image';
 import { ChartSection } from './components/section/chartSection';
@@ -11,14 +11,21 @@ import { TimeLoopParallax } from './components/common/parallax';
 import './sass/main.scss';
 import './sass/custom.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import { IncidentReports } from './components/incidentReports';
+import { shouldHaveHtmlNodeClass } from './helper/documentHelper';
 
 export const ViewerApp: React.FC = () => {
+  const [incidentsOpen, setIncidentsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
       window.skrollr.init();
     }, 500);
   }, [])
+
+  useEffect(() => {
+    shouldHaveHtmlNodeClass('body', 'no-scroll', incidentsOpen);
+  }, [incidentsOpen])
 
   return (
     <div id="wrapper">
@@ -45,11 +52,17 @@ export const ViewerApp: React.FC = () => {
           </div>
         </section>
 
-        <ChartSection />
+        <ChartSection
+          setIncidentsOpen={() => setIncidentsOpen(prev => !prev)}
+        />
 
         <DataSection />
       </div>
 
+      <IncidentReports
+        isOpen={incidentsOpen}
+        setIncidentsOpen={() => setIncidentsOpen(prev => !prev)}
+      />
       <Footer />
 
       <TimeLoopParallax />

@@ -4,6 +4,8 @@
 @import "custom/logo.scss";
 @import "custom/toast.scss";
 @import "custom/parallax.scss";
+@import "custom/tooltip.scss";
+@import "custom/incidents.scss";
 
 html,
 body {
@@ -12,6 +14,10 @@ body {
 
 body {
     height: max(100vh, 100%) !important;
+
+    &.no-scroll {
+        overflow: hidden !important;
+    }
 }
 
 .hidden {
@@ -47,18 +53,21 @@ body {
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.incidents::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #c0c0c0;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.incidents::-webkit-scrollbar {
     width: 10px;
     background-color: #7d76e3;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.incidents::-webkit-scrollbar-thumb {
     background-color: #b4ad60;
     background-image: -webkit-linear-gradient(45deg,
             rgba(255, 255, 255, 0.2) 25%,

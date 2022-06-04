@@ -1,5 +1,6 @@
 export const Site = {
     ref: 'nmsCMProgress',
+    url: 'https://nmscd.github.io/CommunityMission-Progress-Viewer/',
     kurt: {
         fullName: 'Kurt Lourens',
         nickName: 'Khaoz-Topsy',

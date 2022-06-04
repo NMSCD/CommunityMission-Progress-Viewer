@@ -5,8 +5,13 @@ import { ProgressChart } from '../chart/progress/progressChart';
 import { PercentageChart } from '../chart/percentageChange/percentageChart';
 import { BasicImage } from '../core/image';
 import { infoToast } from '../../helper/toastHelper';
+import { Site } from '../../constants/site';
 
-export const ChartSection: React.FC = () => {
+interface IProps {
+    setIncidentsOpen: () => void;
+}
+
+export const ChartSection: React.FC<IProps> = (props: IProps) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
@@ -20,7 +25,7 @@ export const ChartSection: React.FC = () => {
 
     useEffect(() => {
         const paramString = getUrlParamString();
-        window.history.pushState({}, 'title', paramString);
+        window.history.pushState({}, 'NMS Community Mission Progress', paramString);
     }, [
         startDate,
         endDate,
@@ -66,12 +71,17 @@ export const ChartSection: React.FC = () => {
     }
 
     const copySelectedOptions = () => {
-        const baseUrl = 'https://nmscd.github.io/CommunityMission-Progress-Viewer/';
         const paramString = getUrlParamString();
-        const fullLink = baseUrl + paramString;
+        const fullLink = Site.url + paramString;
         navigator?.clipboard?.writeText?.(fullLink)?.then?.(() => {
             infoToast('Copied url');
         });
+    }
+
+    const resetOptions = () => {
+        setStartDate(formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
+        setEndDate(formatDate(new Date(), 'YYYY-MM-DD'));
+        setChartSelected('0');
     }
 
     const renderErrors = (errorMsgs: Array<string>) => (<>{
@@ -126,9 +136,23 @@ export const ChartSection: React.FC = () => {
                     <div style={{ width: '25px' }}></div>
                     <div className="form-control">
                         <label className="center">Share currently selected options</label>
-                        <button className="share-btn" onClick={copySelectedOptions}>
-                            <BasicImage imageUrl="./assets/img/share.svg" alt="share" />
-                        </button>
+                        <span className="tool" data-tip="Reset all the options to default values">
+                            <button className="share-btn" onClick={resetOptions}>
+                                <BasicImage imageUrl="./assets/img/reset.svg" alt="reset" />
+                            </button>
+                        </span>
+                        &nbsp;&nbsp;
+                        <span className="tool" data-tip="Get a shareable link with all your settings included">
+                            <button className="share-btn" onClick={copySelectedOptions}>
+                                <BasicImage imageUrl="./assets/img/share.svg" alt="share" />
+                            </button>
+                        </span>
+                        &nbsp;&nbsp;
+                        <span className="tool" data-tip="Get a summary of past incidents or irregularities">
+                            <button className="share-btn" onClick={() => props.setIncidentsOpen()}>
+                                <BasicImage imageUrl="./assets/img/report.svg" alt="report" />
+                            </button>
+                        </span>
                     </div>
                 </div>
                 <div className="flex">

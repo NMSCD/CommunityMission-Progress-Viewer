@@ -10,8 +10,12 @@ export class CommunityMissionService extends BaseApiService {
         return this.get<CommunityMissionViewModel>('HelloGames/CommunityMission/');
     }
 
-    async getCommunityMissionTrackedProgress(startDate: string, endDate: string): Promise<ResultWithValue<Array<CommunityMissionTrackedViewModel>>> {
-        const url = `CommunityMissionProgress/progress/${startDate}/${endDate}`;
+    async getCommunityMissionTrackedProgress(startDate: string, endDate: string, missionId?: number, missionTier?: number): Promise<ResultWithValue<Array<CommunityMissionTrackedViewModel>>> {
+        let trail = '';
+        if (missionId != null && missionTier != null) {
+            trail = missionId + '/' + missionTier;
+        }
+        const url = `CommunityMissionProgress/progress/${startDate}/${endDate}/${trail}`;
         return this.get<Array<CommunityMissionTrackedViewModel>>(url);
     }
 

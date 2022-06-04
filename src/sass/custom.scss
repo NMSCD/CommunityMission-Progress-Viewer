@@ -14,6 +14,7 @@ body {
 
 body {
     height: max(100vh, 100%) !important;
+    overflow: unset !important;
 
     &.no-scroll {
         overflow: hidden !important;
@@ -22,6 +23,18 @@ body {
 
 .hidden {
     display: none;
+}
+
+.hidden-in-desktop {
+    @media screen and (min-width: 980px) {
+        display: none;
+    }
+}
+
+.hidden-in-mobile {
+    @media screen and (max-width: 980px) {
+        display: none;
+    }
 }
 
 .max-width-75 {

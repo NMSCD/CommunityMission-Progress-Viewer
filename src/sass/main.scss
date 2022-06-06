@@ -14,44 +14,34 @@
 
 // Breakpoints.
 
-@include breakpoints(
-	(
-		xlarge: (
-			1281px,
-			1680px,
-		),
-		large: (
-			981px,
-			1280px,
-		),
-		medium: (
-			737px,
-			980px,
-		),
-		small: (
-			481px,
-			736px,
-		),
-		xsmall: (
-			361px,
-			480px,
-		),
-		xxsmall: (
-			null,
-			360px,
-		),
-	)
-);
+@include breakpoints((xlarge: (1281px,
+            1680px,
+        ),
+        large: (981px,
+            1280px,
+        ),
+        medium: (737px,
+            980px,
+        ),
+        small: (481px,
+            736px,
+        ),
+        xsmall: (361px,
+            480px,
+        ),
+        xxsmall: (null,
+            360px,
+        ),
+    ));
 
 // Mixins.
 
 @mixin color($p) {
-	@include color-typography($p);
-	@include color-button($p);
-	@include color-form($p);
-	@include color-icon($p);
-	@include color-section($p);
-	@include color-spotlight($p);
+    @include color-typography($p);
+    @include color-button($p);
+    @include color-form($p);
+    @include color-section($p);
+    @include color-spotlight($p);
 }
 
 // Base.
@@ -65,7 +55,6 @@
 @import "components/row";
 @import "components/button";
 @import "components/form";
-@import "components/icon";
 @import "components/image";
 @import "components/actions";
 @import "components/section";

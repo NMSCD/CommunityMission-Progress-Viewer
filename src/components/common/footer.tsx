@@ -20,10 +20,10 @@ export const Footer: React.FC = () => {
                 <h2>Contributors</h2>
                 <dl className="alt">
                     <dt><BasicLink href={Site.assistantNMS.website} title="AssistantNMS">{Site.assistantNMS.fullName} (Kurt "Khaoz-Topsy")</BasicLink></dt>
-                    <dd>Software Engineer</dd>
+                    <dd><i>Software Engineer</i></dd>
 
                     <dt className="mt1"><Cyberpunk2350TwitterLink /></dt>
-                    <dd>Ideas man &amp; Keeper of obscure knowledge</dd>
+                    <dd><i>Ideas man &amp; Keeper of obscure knowledge</i></dd>
                 </dl>
             </section>
             <p className="copyright">© NMSCD. | {packageJson.version} | Design: <a href="https://html5up.net">HTML5 UP</a>.</p>

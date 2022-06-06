@@ -25,7 +25,7 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                     </div>
                     <div className="body-container">
                         <p className="body">First noticed at {friendlyDateTextFromUtc('2022-06-03T09:54Z')} by <BasicLink href='https://twitter.com/ProceduralTRV/status/1532661985279631360' title='ProceduralTraveller'>Procedural Traveller on Twitter</BasicLink>. The <BasicLink href="https://nomanssky.com">website</BasicLink> was confirmed to be down by multiple players.</p>
-                        <p className="time">{defaultDateTextFromUtc('2022-06-03T09:54Z')} &nbsp; → &nbsp; ongoing</p>
+                        <p className="time">{defaultDateTextFromUtc('2022-06-03T09:54Z')} &nbsp; → &nbsp; {defaultDateTextFromUtc('2022-06-06T09:31Z')}</p>
                     </div>
                 </div>
                 <div className="report">

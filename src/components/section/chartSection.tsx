@@ -23,14 +23,14 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
     const [endDate, setEndDate] = useState<string>(end ?? formatDate(new Date(), 'YYYY-MM-DD'));
     const [chartSelected, setChartSelected] = useState<string>(type ?? '0');
 
-    useEffect(() => {
-        const paramString = getUrlParamString();
-        window.history.pushState({}, 'NMS Community Mission Progress', paramString);
-    }, [
-        startDate,
-        endDate,
-        chartSelected,
-    ]);
+    // useEffect(() => {
+    //     const paramString = getUrlParamString();
+    //     window.history.pushState({}, 'NMS Community Mission Progress', paramString);
+    // }, [
+    //     startDate,
+    //     endDate,
+    //     chartSelected,
+    // ]);
 
     const getCommonDateErrors = (dateParam: string): Array<string> => {
         const errors: Array<string> = [];

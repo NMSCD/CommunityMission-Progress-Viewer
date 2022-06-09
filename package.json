@@ -2,7 +2,7 @@
   "name": "nms-community-mission-viewer",
   "private": true,
   "homepage": "https://nmscd.github.io/communitymission-progress-viewer",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

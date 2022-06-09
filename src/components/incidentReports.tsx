@@ -16,6 +16,9 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
         <>
             <div className={'incidents-bg ' + (props.isOpen === true ? 'open' : 'closed')} onClick={props.setIncidentsOpen}></div>
             <div className={'incidents ' + (props.isOpen === true ? 'open' : 'closed')}>
+                <button className="hidden-in-desktop mb2" style={{ width: '100%', backgroundColor: '#7d76e3' }} onClick={props.setIncidentsOpen}>
+                    Close
+                </button>
                 <div className="report">
                     <div className="heading-row noselect">
                         <img src="./assets/img/error.svg" alt="error" />

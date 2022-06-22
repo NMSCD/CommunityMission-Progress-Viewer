@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { addDays, dateIsBefore, formatDate } from '../../helper/dateHelper';
 import { ProgressChart } from '../chart/progress/progressChart';

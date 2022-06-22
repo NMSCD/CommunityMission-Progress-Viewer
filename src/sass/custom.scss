@@ -82,12 +82,26 @@ body::-webkit-scrollbar,
 body::-webkit-scrollbar-thumb,
 .incidents::-webkit-scrollbar-thumb {
     background-color: #b4ad60;
-    background-image: -webkit-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0.2) 75%,
-            transparent 75%,
-            transparent);
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+}
+
+::selection {
+    background: #00405c;
+    color: white;
+    /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+    background: #00405c;
+    color: white;
+    /* Gecko Browsers */
 }

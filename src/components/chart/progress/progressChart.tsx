@@ -12,6 +12,7 @@ interface IProps {
     hasErrors: boolean;
     startDate: string;
     endDate: string;
+    dataDecreaseRate: number;
 }
 
 export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
@@ -51,6 +52,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
             const timeSeriesList: Array<CommunityMissionTrackedViewModel> = [];
             for (let iteration = 0; iteration < numIterations; iteration++) {
                 const hourToSearchFor = iteration + minHoursSinceEpoch;
+                if (iteration % props.dataDecreaseRate) continue;
 
                 if (hourToSearchFor in groups) {
                     const groupsData: Array<CommunityMissionTrackedViewModel> = groups[hourToSearchFor];
@@ -165,7 +167,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
         <>
             {
                 networkState === NetworkState.Success &&
-                <ResponsiveContainer width="100%" height={600} className="progress-timeline hide-first-xaxis">
+                <ResponsiveContainer width="100%" height={600} className="progress-timeline hide-first-xaxis mt1">
                     <ComposedChart
                         width={800}
                         height={600}
@@ -178,7 +180,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                         <Legend />
                         <Tooltip content={<ProgressChartTooltip />} />
                         <Line
-                            type="monotone"
+                            type="natural"
                             dataKey="spaces"
                             stroke="rgba(0,0,0,0)"
                             dot={<span></span>}
@@ -189,7 +191,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                                 return (
                                     <Area
                                         key={dataSetToMap.key}
-                                        type="monotone"
+                                        type="basis"
                                         connectNulls
                                         dataKey={dataSetToMap.key}
                                         strokeWidth={2}

@@ -22,6 +22,7 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
     const [startDate, setStartDate] = useState<string>(start ?? formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
     const [endDate, setEndDate] = useState<string>(end ?? formatDate(new Date(), 'YYYY-MM-DD'));
     const [chartSelected, setChartSelected] = useState<string>(type ?? '0');
+    const [dataDecreaseRate, setDataDecreaseRate] = useState<number>(1);
 
     // useEffect(() => {
     //     const paramString = getUrlParamString();
@@ -81,6 +82,7 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
     const resetOptions = () => {
         setStartDate(formatDate(addDays(new Date(), -7), 'YYYY-MM-DD'));
         setEndDate(formatDate(new Date(), 'YYYY-MM-DD'));
+        setDataDecreaseRate(1);
         setChartSelected('0');
     }
 
@@ -99,6 +101,7 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
                     <ProgressChart
                         startDate={startDate.toString()}
                         endDate={endDate.toString()}
+                        dataDecreaseRate={dataDecreaseRate}
                         hasErrors={[
                             ...startDateErrors,
                             ...endDateErrors
@@ -155,7 +158,7 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
                         </span>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex mb2">
                     <div className="form-control">
                         <label htmlFor="startDate">Start Date</label>
                         <input
@@ -178,8 +181,25 @@ export const ChartSection: React.FC<IProps> = (props: IProps) => {
                         {renderErrors(endDateErrors)}
                     </div>
                 </div>
+                <div className="flex">
+                    {
+                        (chartSelected == '0') &&
+                        <div className="form-control">
+                            <label>Chart smoothness</label>
+                            <div className="range-slider-container">
+                                <div className="range-slider">
+                                    <input className="range-slider-range" type="range" value={dataDecreaseRate} onChange={(e: any) => setDataDecreaseRate(e?.target?.value)} min="1" max="10" step="1" />
+                                    <span className="range-slider-value">{dataDecreaseRate}</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div style={{ width: '25px' }}></div>
+                    <div className="form-control">
+                    </div>
+                </div>
             </div>
-            <div className="content chart-section noselect">
+            <div key={'content' + dataDecreaseRate} className="content chart-section noselect">
                 {renderChart(chartSelected)}
             </div>
         </section>

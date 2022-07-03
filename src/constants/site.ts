@@ -1,6 +1,6 @@
 export const Site = {
     ref: 'nmsCMProgress',
-    url: 'https://nmscd.github.io/CommunityMission-Progress-Viewer/',
+    url: 'http://community-mission.nmscd.com/',
     kurt: {
         fullName: 'Kurt Lourens',
         nickName: 'Khaoz-Topsy',
@@ -23,9 +23,9 @@ export const Site = {
     nmscd: {
         fullName: 'No Man\'s Sky Community Developers',
         nickName: 'NMSCD',
-        website: 'https://nmscd.github.io/',
+        website: 'http://www.nmscd.com',
         github: 'https://github.com/NMSCD',
-        projectsPage: 'https://nmscd.github.io/projects.html',
+        projectsPage: 'http://www.nmscd.com/projects.html',
     },
     assistantApps: {
         name: 'AssistantApps',

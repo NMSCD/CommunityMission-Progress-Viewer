@@ -27,6 +27,18 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                         </div>
                     </div>
                     <div className="body-container">
+                        <p className="body">First noticed at {friendlyDateTextFromUtc('2022-07-24T21:55Z')} by <BasicLink href="https://twitter.com/bomber_that/status/1551433207387750405" title="ThatBomberBoi">ThatBomberBoi on Twitter</BasicLink>. The <BasicLink href="https://nomanssky.com">website</BasicLink> was confirmed to be down.</p>
+                        <p className="time">{defaultDateTextFromUtc('2022-07-24T21:55Z')} &nbsp; → &nbsp; {defaultDateTextFromUtc('2022-07-24T22:10Z')}</p>
+                    </div>
+                </div>
+                <div className="report">
+                    <div className="heading-row noselect">
+                        <img src="./assets/img/error.svg" alt="error" />
+                        <div className="info-container">
+                            <p className="title">No Man's Sky website outage</p>
+                        </div>
+                    </div>
+                    <div className="body-container">
                         <p className="body">First noticed at {friendlyDateTextFromUtc('2022-06-03T09:54Z')} by <BasicLink href='https://twitter.com/ProceduralTRV/status/1532661985279631360' title='ProceduralTraveller'>Procedural Traveller on Twitter</BasicLink>. The <BasicLink href="https://nomanssky.com">website</BasicLink> was confirmed to be down by multiple players.</p>
                         <p className="time">{defaultDateTextFromUtc('2022-06-03T09:54Z')} &nbsp; → &nbsp; {defaultDateTextFromUtc('2022-06-06T09:31Z')}</p>
                     </div>

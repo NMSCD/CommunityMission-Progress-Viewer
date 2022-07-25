@@ -2,7 +2,7 @@
   "name": "nms-community-mission-viewer",
   "private": true,
   "homepage": "https://community-mission.nmscd.com",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

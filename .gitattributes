@@ -1,0 +1,5 @@
+src/sass/base/* -linguist-detectable
+src/sass/layout/* -linguist-detectable
+src/sass/component/* -linguist-detectable
+src/sass/libs/* -linguist-detectable
+src/sass/libs/main.scss -linguist-detectable

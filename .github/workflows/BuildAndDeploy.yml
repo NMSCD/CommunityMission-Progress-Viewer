@@ -26,7 +26,7 @@ jobs:
 
       - name: Build TS
         run: |
-          npm ci
+          npm ci --force
           npm run build
 
       - name: Deploy to GitHub Pages

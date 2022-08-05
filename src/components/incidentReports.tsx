@@ -9,8 +9,8 @@ interface IProps {
 
 export const IncidentReports: React.FC<IProps> = (props: IProps) => {
 
-    const defaultDateTextFromUtc = (dateString: string) => formatDate((new Date(dateString)).toLocaleString(), 'YYYY-MM-DD HH:mm');
-    const friendlyDateTextFromUtc = (dateString: string) => formatDate((new Date(dateString)).toLocaleString(), 'HH:mm on YYYY-MM-DD');
+    const defaultDateTextFromUtc = (dateString: string) => formatDate((new Date(dateString)).toLocaleString(), 'YYYY-MM-DD HH:mm (Z)');
+    const friendlyDateTextFromUtc = (dateString: string) => formatDate((new Date(dateString)).toLocaleString(), 'HH:mm on YYYY-MM-DD (Z)');
 
     return (
         <>
@@ -19,6 +19,18 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                 <button className="hidden-in-desktop mb2" style={{ width: '100%', backgroundColor: '#7d76e3' }} onClick={props.setIncidentsOpen}>
                     Close
                 </button>
+                <div className="report">
+                    <div className="heading-row noselect">
+                        <img src="./assets/img/report.svg" alt="report" />
+                        <div className="info-container">
+                            <p className="title">3rd Community Progress spike</p>
+                        </div>
+                    </div>
+                    <div className="body-container">
+                        <p className="body">A large amount of progress was mysteriously made at around {friendlyDateTextFromUtc('2022-08-05T08:57Z')}. The cause of this sudden spike in progress has not been officially been commented on.</p>
+                        <p className="time">{defaultDateTextFromUtc('2022-08-05T08:57Z')}</p>
+                    </div>
+                </div>
                 <div className="report">
                     <div className="heading-row noselect">
                         <img src="./assets/img/error.svg" alt="error" />

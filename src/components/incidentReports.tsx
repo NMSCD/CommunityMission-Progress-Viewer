@@ -21,6 +21,18 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                 </button>
                 <div className="report">
                     <div className="heading-row noselect">
+                        <img src="./assets/img/error.svg" alt="error" />
+                        <div className="info-container">
+                            <p className="title">Progress tracking error</p>
+                        </div>
+                    </div>
+                    <div className="body-container">
+                        <p className="body">The AssistantNMS tracker did not detect that Community Mission 71 had already started for several days. Extra logic has been added to try prevent this issue occurring again. The data has also been altered for this period to reflect what was approximately displayed in game.</p>
+                        <p className="time">{formatDate((new Date('2023-01-20')).toLocaleString(), 'YYYY-MM-DD')} &nbsp; → &nbsp; {formatDate((new Date('2023-01-23')).toLocaleString(), 'YYYY-MM-DD')}</p>
+                    </div>
+                </div>
+                <div className="report">
+                    <div className="heading-row noselect">
                         <img src="./assets/img/report.svg" alt="report" />
                         <div className="info-container">
                             <p className="title">3rd Community Progress spike</p>

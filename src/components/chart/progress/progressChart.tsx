@@ -98,7 +98,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                         // newObj[dataSetToMap.key] = 0;
                     }
                     else {
-                        if (newObj.percentage > 0 && newObj.percentage < 100) {
+                        if (newObj.percentage > 0 && newObj.percentage <= 100) {
                             newObj[dataSetToMap.key] = newObj.percentage;
                         }
                     }

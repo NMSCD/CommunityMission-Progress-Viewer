@@ -85,6 +85,7 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
     }
 
     const handleData = (sortedData: Array<CommunityMissionTrackedViewModel>, dataSetsToMap: Array<any>): Array<CommunityMissionTrackedViewModel> => {
+        const maxPercentLookup: any = {};
         try {
             const dataWithMultiplDataSetMappings: Array<CommunityMissionTrackedViewModel> = [];
             for (let sortedDataItemIndex = 0; sortedDataItemIndex < sortedData.length; sortedDataItemIndex++) {
@@ -98,7 +99,13 @@ export const ProgressChart: React.FC<IProps> = React.memo((props: IProps) => {
                         // newObj[dataSetToMap.key] = 0;
                     }
                     else {
-                        if (newObj.percentage > 0 && newObj.percentage <= 100) {
+                        if (newObj.percentage > 0) {
+                            if (newObj.percentage >= 100) {
+                                if (maxPercentLookup[newObj.missionId]) {
+                                    continue;
+                                }
+                                maxPercentLookup[newObj.missionId] = true;
+                            }
                             newObj[dataSetToMap.key] = newObj.percentage;
                         }
                     }

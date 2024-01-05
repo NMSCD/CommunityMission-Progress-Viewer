@@ -125,7 +125,7 @@ export const PercentageChart: React.FC<IProps> = React.memo((props: IProps) => {
                             fill={progressChartColours[0]}
                         >
                             {sortedData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={weekDayColours[index % weekDayColours.length]} />
+                                <Cell key={`cell-${index}`} fill={weekDayColours[(new Date(entry.daySinceEpochInterval * 86400000)).getDay()]} />
                             ))}
                         </Bar>
                     </BarChart>

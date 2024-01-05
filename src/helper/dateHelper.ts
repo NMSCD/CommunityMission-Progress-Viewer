@@ -27,12 +27,3 @@ export const dateIsBefore = (firstDate: Date, secondDate: Date): boolean => {
         return false;
     }
 }
-
-export const friendlyTimeLeft = (startDate: Date, endDate: Date): string => {
-    if (endDate < (new Date())) {
-        return 'Complete';
-    }
-
-    dayjs.extend(relativeTime);
-    return dayjs(startDate).to(endDate, true);
-}

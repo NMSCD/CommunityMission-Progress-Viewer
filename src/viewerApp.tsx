@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { BasicImage } from './components/core/image';
-import { ChartSection } from './components/section/chartSection';
-import { DataSection } from './components/section/dataSection';
+
+import { Footer } from './components/common/footer';
 import { Header } from './components/common/header';
 import { Navbar } from './components/common/navbar';
-import { Footer } from './components/common/footer';
 import { TimeLoopParallax } from './components/common/parallax';
-
-import './sass/main.scss';
-import './sass/custom.scss';
-import 'react-toastify/dist/ReactToastify.css';
+import { BasicImage } from './components/core/image';
 import { IncidentReports } from './components/incidentReports';
+import { ChartSection } from './components/section/chartSection';
+import { DataSection } from './components/section/dataSection';
 import { shouldHaveHtmlNodeClass } from './helper/documentHelper';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './sass/custom.scss';
+import './sass/main.scss';
 
 export const ViewerApp: React.FC = () => {
   const [incidentsOpen, setIncidentsOpen] = useState<boolean>(false);

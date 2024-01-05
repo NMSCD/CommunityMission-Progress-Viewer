@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
                     <li><BasicLink href={Site.nmscd.github} additionalClassNames="button">{Site.nmscd.nickName} Github Organisation</BasicLink></li>
                 </ul>
                 <ul className="actions mt1">
-                    <li><BasicLink href={Site.nmscd.projectsPage} additionalClassNames="button">{Site.nmscd.nickName} projects page</BasicLink></li>
+                    <li><BasicLink href={Site.nmscd.website} additionalClassNames="button">{Site.nmscd.nickName}</BasicLink></li>
                 </ul>
             </section>
             <section>

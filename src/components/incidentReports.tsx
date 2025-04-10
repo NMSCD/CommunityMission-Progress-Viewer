@@ -28,7 +28,19 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                         </div>
                     </div>
                     <div className="body-container">
-                        <p className="body">The AssistantNMS tracker did not detect that Community Mission 77 had started for the Singularity Expedition. The data has also been altered for this period to reflect what was approximately displayed in game.</p>
+                        <p className="body">The AssistantNMS tracker did not track data for nearly 3 weeks. This occurred during the holiday of AssistantNMS (Kurt). Simply turning it off and on again resolved the issue.</p>
+                        <p className="time">{shortDateTextFromUtc(Date.UTC(2025, 3, 20))} &nbsp; → &nbsp; {defaultDateTextFromUtc(Date.UTC(2025, 4, 10))}</p>
+                    </div>
+                </div>
+                <div className="report">
+                    <div className="heading-row noselect">
+                        <img src="./assets/img/error.svg" alt="error" />
+                        <div className="info-container">
+                            <p className="title">Progress tracking error</p>
+                        </div>
+                    </div>
+                    <div className="body-container">
+                        <p className="body">The AssistantNMS tracker did not detect that Community Mission 77 had started for the Singularity Expedition. The data has been altered for this period to reflect what was approximately displayed in game.</p>
                         <p className="time">{shortDateTextFromUtc(Date.UTC(2023, 6, 7))} &nbsp; → &nbsp; {defaultDateTextFromUtc(Date.UTC(2023, 6, 7, 7, 57))}</p>
                     </div>
                 </div>

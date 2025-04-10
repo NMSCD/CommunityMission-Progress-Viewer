@@ -27,10 +27,11 @@ export const DataSection: React.FC = () => {
         getCurrentData();
     }, []);
 
-    const firstHourSinceEpoch = 282300;
+    const firstHourSinceEpoch = 175308;
     const currentHourSinceEpoch = Math.floor((new Date()).getTime() / 1000 / 60 / 60);
 
     const hoursSinceStartedRecording = currentHourSinceEpoch - firstHourSinceEpoch;
+    const recordsSinceStartedRecording = hoursSinceStartedRecording * 12;
 
     let missionTierDisplay = '? / ??';
     if (networkState == NetworkState.Loading) missionTierDisplay = '...';
@@ -59,7 +60,7 @@ export const DataSection: React.FC = () => {
                     style="style2"
                     iconClass="icon-database"
                     description="Number of records"
-                    value={(hoursSinceStartedRecording * 12)}
+                    value={recordsSinceStartedRecording}
                     displayValueFunc={(val) => val.toLocaleString()}
                 />
                 <DataSectionStat

@@ -29,7 +29,7 @@ export const IncidentReports: React.FC<IProps> = (props: IProps) => {
                     </div>
                     <div className="body-container">
                         <p className="body">The AssistantNMS tracker did not track data for nearly 3 weeks. This occurred during the holiday of AssistantNMS (Kurt). Simply turning it off and on again resolved the issue.</p>
-                        <p className="time">{shortDateTextFromUtc(Date.UTC(2025, 3, 20))} &nbsp; → &nbsp; {defaultDateTextFromUtc(Date.UTC(2025, 4, 10))}</p>
+                        <p className="time">{shortDateTextFromUtc(Date.UTC(2025, 3, 20))} &nbsp; → &nbsp; {shortDateTextFromUtc(Date.UTC(2025, 4, 10))}</p>
                     </div>
                 </div>
                 <div className="report">

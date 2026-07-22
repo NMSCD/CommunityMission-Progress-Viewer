@@ -11,7 +11,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^0.33.0",
     "dayjs": "^1.11.1",
     "framer-motion": "^6.3.3",
     "react": "^18.0.0",
